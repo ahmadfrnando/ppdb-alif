@@ -131,10 +131,10 @@ class PendaftaranController extends Controller
         }
     }
 
-    public function mail($id)
-    {
-        $data = Pendaftaran::find($id);
+    // public function mail($id)
+    // {
+    //     $data = Pendaftaran::find($id);
 
-        return view('pendaftaran-pdf', compact('data'));
-    }
+    //     return view('pendaftaran-pdf', compact('data'));
+    // }
 }

@@ -36,8 +36,8 @@ Route::get('/pengumuman-detail/{id}', [PengumumanController::class, 'detail'])->
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact/kirim', [ContactController::class, 'kirim'])->name('kirim');
 
-Route::get('/test', function () {
-    return view('pendaftaran-pdf');});
+// Route::get('/test', function () {
+//     return view('pendaftaran-pdf');});
 // Route::get('/select-location', function () {
 //     return view('select-location');
 // })->name('select-location');
@@ -49,7 +49,7 @@ Route::post('/zonasi/proses', [ZonasicekController::class, 'prosesZonasi'])->nam
 
 Route::get('/pendaftaran', [PendaftaranController::class, 'index'])->name('pendaftaran.index');
 Route::post('/pendaftaran', [PendaftaranController::class, 'store'])->name('pendaftaran.store');
-Route::get('/pendaftaran/{id}', [PendaftaranController::class, 'mail'])->name('pendaftaran.mail');
+// Route::get('/pendaftaran/{id}', [PendaftaranController::class, 'mail'])->name('pendaftaran.mail');
 Route::get('/pendaftaran/export', function (\Illuminate\Http\Request $request) {
     $bulanMulai = $request->input('bulan_mulai');
     $bulanAkhir = $request->input('bulan_akhir');
