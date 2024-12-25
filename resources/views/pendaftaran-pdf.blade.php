@@ -134,33 +134,33 @@ button:hover {
         <h1>Form Pendaftaran</h1>
         <div class="data-section">
             <h2>Data Siswa</h2>
-            <p><strong>Nama Siswa:</strong> John Doe</p>
-            <p><strong>Tempat, Tanggal Lahir:</strong> Surabaya, 12 Desember 2005</p>
-            <p><strong>Agama:</strong> Islam</p>
-            <p><strong>Warga Negara:</strong> Indonesia</p>
-            <p><strong>Jumlah Saudara:</strong> 3</p>
-            <p><strong>Anak Ke:</strong> 1</p>
+            <p><strong>Nama Siswa:</strong> {{ $data->nama_siswa }}</p>
+            <p><strong>Tempat, Tanggal Lahir:</strong> {{ $data->ttl }}</p>
+            <p><strong>Agama:</strong> {{ $data->agama }}</p>
+            <p><strong>Warga Negara:</strong> {{ $data->warga_negara }}</p>
+            <p><strong>Jumlah Saudara:</strong> {{ $data->jlh_saudara }} </p>
+            <p><strong>Anak Ke:</strong>{{ $data->anak_ke}} </p>
         </div>
 
         <div class="data-section">
             <h2>Data Orang Tua</h2>
-            <p><strong>Nama Ayah:</strong> Abdul Rahman</p>
-            <p><strong>Pendidikan Ayah:</strong> Sarjana</p>
-            <p><strong>Pekerjaan Ayah:</strong> Pegawai Negeri</p>
-            <p><strong>Nama Ibu:</strong> Siti Aisyah</p>
-            <p><strong>Pendidikan Ibu:</strong> Sarjana</p>
-            <p><strong>Pekerjaan Ibu:</strong> Ibu Rumah Tangga</p>
+            <p><strong>Nama Ayah:</strong> {{ $data->nama_ayah }} </p>
+            <p><strong>Pendidikan Ayah:</strong> {{ $data->pendidikan_ayah}} </p>
+            <p><strong>Pekerjaan Ayah:</strong> {{ $data->pekerjaan_ayah}} </p>
+            <p><strong>Nama Ibu:</strong> {{ $data->nama_ibu}} </p>
+            <p><strong>Pendidikan Ibu:</strong> {{ $data->pendidikan_ibu}} </p>
+            <p><strong>Pekerjaan Ibu:</strong> {{ $data->pekerjaan_ibu}} </p>
         </div>
 
         <div class="data-section">
             <h2>Data Wali</h2>
-            <p><strong>Nama Wali:</strong> Ahmad Yani</p>
-            <p><strong>Pendidikan Wali:</strong> Diploma</p>
-            <p><strong>Pekerjaan Wali:</strong> Wiraswasta</p>
-            <p><strong>Alamat:</strong> Jalan Mawar No. 123, Surabaya</p>
-            <p><strong>No. Telp/HP:</strong> 081234567890</p>
-            <p><strong>Email:</strong> ahmad.yani@gmail.com</p>
-        </div>
+            <p><strong>Nama Wali:</strong> {{ $data->nama_wali}} </p>
+            <p><strong>Pendidikan Wali:</strong> {{ $data->pendidikan_wali}} </p>
+            <p><strong>Pekerjaan Wali:</strong>  {{ $data->pekerjaan_wali}}</p>
+            <p><strong>Alamat:</strong> {{ $data->alamat}} </p>
+            <p><strong>No. Telp/HP:</strong> {{ $data->telp}} </p>
+            <p><strong>Email:</strong> {{ $data->email}} </p>
+        </div>rb
     </div>
 </body>
 </html>

@@ -51,7 +51,8 @@ class PendaftaranController extends Controller
                 'telp' => 'required',
                 'email' => 'required',
             ]);
-
+            $distance = 0.00;
+            $status = 'Tidak Lulus Zonasi';
             $alamat = $data['alamat'];
 
             // Menggunakan Nominatim API untuk mendapatkan koordinat dari alamat
@@ -87,34 +88,6 @@ class PendaftaranController extends Controller
                     $distance = $orsResponse->json()['distances'][0][1] / 1000;
 
                     $status = ($distance <= 3) ? 'Lulus Zonasi' : 'Tidak Lulus Zonasi';
-
-                    // Simpan data pendaftaran ke database dengan status zonasi dan jarak
-                    Pendaftaran::create([
-                        'nama_siswa' => $data['nama_siswa'],
-                        'agama' => $data['agama'],
-                        'warga_negara' => $data['warga_negara'],
-                        'jlh_saudara' => $data['jlh_saudara'],
-                        'anak_ke' => $data['anak_ke'],
-                        'ttl' => $data['ttl'],
-                        'nama_ayah' => $data['nama_ayah'],
-                        'pendidikan_ayah' => $data['pendidikan_ayah'],
-                        'pekerjaan_ayah' => $data['pekerjaan_ayah'],
-                        'nama_ibu' => $data['nama_ibu'],
-                        'pendidikan_ibu' => $data['pendidikan_ibu'],
-                        'pekerjaan_ibu' => $data['pekerjaan_ibu'],
-                        'nama_wali' => $data['nama_wali'],
-                        'pendidikan_wali' => $data['pendidikan_wali'],
-                        'pekerjaan_wali' => $data['pekerjaan_wali'],
-                        'alamat' => $alamat,
-                        'telp' => $data['telp'],
-                        'email' => $data['email'],
-                        'zonasi' => $status,
-                        'jarak' => $distance,
-                    ]);
-
-                    Mail::to('ando@com')->send(new MailNotify());
-
-                    return redirect('/pendaftaran')->with('success', 'Pendaftaran berhasil dilakukan');
                 } else {
                     Log::error('OpenRouteService error:', $orsResponse->json());
                     return redirect('/pendaftaran')->with('error', 'Gagal menghitung jarak');
@@ -123,9 +96,45 @@ class PendaftaranController extends Controller
                 Log::error('Nominatim error: Alamat tidak ditemukan atau tidak valid.');
                 return redirect('/pendaftaran')->with('error', 'Alamat tidak valid');
             }
+            // Simpan data pendaftaran ke database dengan status zonasi dan jarak
+            $dataPendaftaran = Pendaftaran::create([
+                'nama_siswa' => $data['nama_siswa'],
+                'agama' => $data['agama'],
+                'warga_negara' => $data['warga_negara'],
+                'jlh_saudara' => $data['jlh_saudara'],
+                'anak_ke' => $data['anak_ke'],
+                'ttl' => $data['ttl'],
+                'nama_ayah' => $data['nama_ayah'],
+                'pendidikan_ayah' => $data['pendidikan_ayah'],
+                'pekerjaan_ayah' => $data['pekerjaan_ayah'],
+                'nama_ibu' => $data['nama_ibu'],
+                'pendidikan_ibu' => $data['pendidikan_ibu'],
+                'pekerjaan_ibu' => $data['pekerjaan_ibu'],
+                'nama_wali' => $data['nama_wali'],
+                'pendidikan_wali' => $data['pendidikan_wali'],
+                'pekerjaan_wali' => $data['pekerjaan_wali'],
+                'alamat' => $alamat,
+                'telp' => $data['telp'],
+                'email' => $data['email'],
+                'zonasi' => $status,
+                'jarak' => $distance,
+            ]);
+
+            $id = $dataPendaftaran->id;
+
+            Mail::to('ando@com')->send(new MailNotify($id));
+
+            return redirect('/pendaftaran')->with('success', 'Pendaftaran berhasil dilakukan');
         } catch (Exception $e) {
             Log::error('Error:', ['message' => $e->getMessage()]);
             return redirect('/pendaftaran')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
+    }
+
+    public function mail($id)
+    {
+        $data = Pendaftaran::find($id);
+
+        return view('pendaftaran-pdf', compact('data'));
     }
 }

@@ -55,7 +55,7 @@ class PengumumanResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('no')->rowIndex(),
-                TextColumn::make('judul'),
+                TextColumn::make('judul')->limit(30),
                 TextColumn::make('tgl')->label('Dibuat Pada')->dateTime('d M Y'),
                 ImageColumn::make('foto')->label('Gambar'),
             ])

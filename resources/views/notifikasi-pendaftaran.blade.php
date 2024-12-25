@@ -33,7 +33,7 @@
         <h3 class="">Welcome To TK. RAUDHATUL ATHFAL KOTA BINJAI</h3>
         <hr class="garis">
         <p>Silahkan download bukti pendaftaran anda pada link dibawah ini.</p>
-        <a href="http://alif.dev/pendaftaran/2">Bukti Pendaftaran PPDB TK. RAUDHATUL ATHFAL KOTA BINJAI</a>
+        <a href="http://127.0.0.1:8000/pendaftaran/{{ $id }}">Bukti Pendaftaran PPDB TK. RAUDHATUL ATHFAL KOTA BINJAI</a>
     </div>
 </body>
 </html>

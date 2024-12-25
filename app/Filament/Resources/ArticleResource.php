@@ -41,7 +41,7 @@ class ArticleResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('no')->rowIndex(),
-                TextColumn::make('judul')->searchable(),
+                TextColumn::make('judul')->searchable()->limit(30),
                 TextColumn::make('tgl')->date('d F Y')->label('Pada Tanggal'),
             ])
             ->filters([

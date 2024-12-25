@@ -1,53 +1,35 @@
 @extends('layouts.main')
 
-
 @section('content')
 
 <div class="container px-4 mx-auto lg:pt-24 lg:pb-64">
-  <div class="mb-12 text-center">
-      <h2 class="text-4xl font-semibold">Artikel Terbaru</h2>
-      <p class="mt-4 text-lg leading-relaxed text-gray-500">
-          Temukan artikel terbaru kami yang memberikan informasi penting dan menarik seputar dunia pendidikan.
-      </p>
-  </div>
+    <div class="mb-12 text-center">
+        <h2 class="text-5xl font-extrabold text-gray-800">Artikel Terbaru</h2>
+        <p class="mt-4 text-lg text-gray-600">
+            Temukan artikel terbaru kami yang memberikan informasi menarik dan inspiratif seputar dunia pendidikan.
+        </p>
+    </div>
 
-  <div class="flex flex-wrap -mx-4">
-      <!-- Artikel 1 -->
-      <div class="w-full px-4 mb-8 md:w-6/12 lg:w-4/12">
-          <div class="overflow-hidden bg-white rounded-lg shadow-lg">
-              <img alt="Artikel 1" src="images/1.jpg" class="object-cover w-full h-48" />
-              <div class="p-6">
-                  <h5 class="text-xl font-semibold text-gray-800">Pentingnya Pendidikan Anak Usia Dini</h5>
-                  <p class="mt-2 text-gray-600">Mendidik anak sejak dini adalah langkah penting untuk perkembangan mereka. Artikel ini membahas tentang pentingnya pendidikan usia dini bagi masa depan anak.</p>
-                  <a href="/article-detail" class="inline-block mt-4 text-blue-500">Baca Selengkapnya &rarr;</a>
-              </div>
-          </div>
-      </div>
-
-      <!-- Artikel 2 -->
-      <div class="w-full px-4 mb-8 md:w-6/12 lg:w-4/12">
-          <div class="overflow-hidden bg-white rounded-lg shadow-lg">
-              <img alt="Artikel 2" src="images/2.jpg" class="object-cover w-full h-48" />
-              <div class="p-6">
-                  <h5 class="text-xl font-semibold text-gray-800">Cara Menjaga Kesehatan Mental Anak</h5>
-                  <p class="mt-2 text-gray-600">Kesehatan mental juga sangat penting bagi anak-anak. Artikel ini memberikan tips untuk menjaga kesehatan mental anak sejak usia dini.</p>
-                  <a href="#" class="inline-block mt-4 text-blue-500">Baca Selengkapnya &rarr;</a>
-              </div>
-          </div>
-      </div>
-
-      <!-- Artikel 3 -->
-      <div class="w-full px-4 mb-8 md:w-6/12 lg:w-4/12">
-          <div class="overflow-hidden bg-white rounded-lg shadow-lg">
-              <img alt="Artikel 3" src="images/3.jpg" class="object-cover w-full h-48" />
-              <div class="p-6">
-                  <h5 class="text-xl font-semibold text-gray-800">Tips Meningkatkan Kreativitas Anak</h5>
-                  <p class="mt-2 text-gray-600">Kreativitas anak dapat dibentuk melalui berbagai kegiatan yang menyenangkan. Artikel ini berbagi tips untuk meningkatkan kreativitas anak di usia dini.</p>
-                  <a href="#" class="inline-block mt-4 text-blue-500">Baca Selengkapnya &rarr;</a>
-              </div>
-          </div>
-      </div>
-  </div>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Artikel Loop -->
+        @foreach($artikel as $a)
+        <div class="overflow-hidden bg-white rounded-lg shadow-lg group">
+            <div class="p-6">
+                <h5 class="text-2xl font-bold text-gray-800 group-hover:text-blue-500 transition duration-300">
+                    {{ $a->judul }}
+                </h5>
+                <p class="mt-3 text-sm text-gray-500">{{ \Carbon\Carbon::parse($a->tanggal)->format('d M Y') }}</p>
+                <p class="mt-4 text-gray-600 line-clamp-3">
+                    {{ \Illuminate\Support\Str::limit(strip_tags($a->body), 100, '...') }}
+                </p>
+                <a href="/article-detail/{{ $a->id }}" 
+                   class="inline-block mt-6 text-blue-600 hover:text-blue-800 font-semibold transition duration-300">
+                    Baca Selengkapnya &rarr;
+                </a>
+            </div>
+        </div>
+        @endforeach
+    </div>
 </div>
 
 @endsection

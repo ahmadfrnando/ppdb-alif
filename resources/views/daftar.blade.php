@@ -35,7 +35,7 @@
                 <div>
                     <label for="nama_siswa" class="block mb-2 text-sm font-medium">Nama Siswa</label>
                     <input type="text" name="nama_siswa" id="nama_siswa"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ old('nama_siswa') }}"
                         required>
                 </div>
                 <div>
@@ -77,7 +77,7 @@
                     <label for="nama_ayah" class="block mb-2 text-sm font-medium">Nama Ayah</label>
                     <input type="text" name="nama_ayah" id="nama_ayah"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        required>
+                        required ">
                 </div>
                 <div>
                     <label for="pendidikan_ayah" class="block mb-2 text-sm font-medium">Pendidikan Ayah</label>

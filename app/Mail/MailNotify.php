@@ -13,12 +13,14 @@ class MailNotify extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $id;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($id)
     {
-        //
+        $this->id = $id;
     }
 
     /**
