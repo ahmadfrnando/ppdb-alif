@@ -9,7 +9,7 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $artikel = Article::all();
+        $artikel = Article::paginate(6);
         $title = 'Article';
         $favicon = asset('images/logo-triwuri.png');
         return view('article', compact('artikel', 'title', 'favicon'));

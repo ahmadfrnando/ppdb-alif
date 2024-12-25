@@ -20,6 +20,8 @@
       </div>
       @endforeach
   </div>
-  {{ $gallery->links()}}
+  <div class="mt-8 text-center lg:mt-12 xl:mt-16">
+        {{ $gallery->links() }}
+    </div>
 </section>
 @endsection

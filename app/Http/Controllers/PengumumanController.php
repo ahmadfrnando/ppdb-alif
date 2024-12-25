@@ -9,7 +9,7 @@ class PengumumanController extends Controller
 {
     public function index()
     {   
-        $pengumuman = Pengumuman::all();
+        $pengumuman = Pengumuman::paginate(6);
         $title = 'Pengumuman';
         $favicon = asset('images/logo-triwuri.png');
         return view('pengumuman', compact('pengumuman', 'title', 'favicon'));

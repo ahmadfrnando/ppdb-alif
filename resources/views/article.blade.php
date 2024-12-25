@@ -30,6 +30,9 @@
         </div>
         @endforeach
     </div>
+    <div class="mt-8 text-center lg:mt-12 xl:mt-16">
+        {{ $artikel->links() }}
+    </div>
 </div>
 
 @endsection
