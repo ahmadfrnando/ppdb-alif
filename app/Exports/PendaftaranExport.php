@@ -75,7 +75,6 @@ class PendaftaranExport implements FromQuery, WithHeadings, WithMapping, WithCol
             $pendaftaran->pekerjaan_wali,
             $pendaftaran->alamat,
             $pendaftaran->telp,
-            $pendaftaran->alamat,
             $pendaftaran->email,
             $pendaftaran->created_at,
             $pendaftaran->zonasi,
