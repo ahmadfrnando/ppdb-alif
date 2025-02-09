@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\Login;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -27,7 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->sidebarCollapsibleOnDesktop(true)
-            ->login()
+            ->login(Login::class)
             ->favicon(asset('images/logo-triwuri.png'))
             ->colors([
                 'primary' => Color::Amber,

@@ -17,14 +17,14 @@
 
         <!-- Notifikasi -->
         @if (session('success'))
-            <div class="p-4 mb-6 text-green-800 bg-green-100 rounded">
-                {{ session('success') }}
-            </div>
+        <div class="p-4 mb-6 text-green-800 bg-green-100 rounded">
+            {{ session('success') }}
+        </div>
         @endif
         @if (session('error'))
-            <div class="p-4 mb-6 text-red-800 bg-red-100 rounded">
-                {{ session('error') }}
-            </div>
+        <div class="p-4 mb-6 text-red-800 bg-red-100 rounded">
+            {{ session('error') }}
+        </div>
         @endif
 
         <form action="{{ route('pendaftaran.store') }}" method="POST">
@@ -80,7 +80,7 @@
                         required ">
                 </div>
                 <div>
-                    <label for="pendidikan_ayah" class="block mb-2 text-sm font-medium">Pendidikan Ayah</label>
+                    <label for=" pendidikan_ayah" class="block mb-2 text-sm font-medium">Pendidikan Ayah</label>
                     <input type="text" name="pendidikan_ayah" id="pendidikan_ayah"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         required>
@@ -129,12 +129,6 @@
                         required>
                 </div>
                 <div>
-                    <label for="alamat" class="block mb-2 text-sm font-medium">Alamat</label>
-                    <input type="text" name="alamat" id="alamat"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        required>
-                </div>
-                <div>
                     <label for="telp" class="block mb-2 text-sm font-medium">No. Telp/Hp</label>
                     <input type="tel" name="telp" id="telp"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -146,8 +140,20 @@
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         required>
                 </div>
+                <div>
+                    <label for="alamat" class="block mb-2 text-sm font-medium">Alamat Lengkap</label>
+                    <input type="text" name="alamat" id="alamat"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        required />
+                    <input type="text" name="jarakText" id="jarakText"
+                        class="hidden bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        readonly />
+                    <input type="text" name="jarakValue" id="jarakValue"
+                        class="hidden bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        readonly />
+                </div>
             </div>
-            <div class="flex justify-end">
+            <div class=" flex justify-end">
                 <a href="/"
                     class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none">Kembali</a>
                 <button type="submit"
@@ -155,6 +161,57 @@
             </div>
         </form>
     </div>
+    <script>
+        function initMap() {
+            // Inisialisasi Autocomplete hanya untuk input tujuan
+            const destinationInput = document.getElementById("alamat");
+            const destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput);
+
+            // Ketika user memilih alamat, langsung hitung jaraknya
+            destinationAutocomplete.addListener("place_changed", function() {
+                const destinationPlace = destinationAutocomplete.getPlace();
+
+                if (!destinationPlace.geometry) {
+                    console.log("Silakan pilih alamat yang valid.");
+                    return;
+                }
+
+                // Origin tetap statis
+                const origin = {
+                    lat: 3.5900177,
+                    lng: 98.6405321
+                };
+                const destination = destinationPlace.formatted_address;
+
+                // Panggil Google Maps Distance Matrix API
+                const service = new google.maps.DistanceMatrixService();
+                const request = {
+                    origins: [origin],
+                    destinations: [destination],
+                    travelMode: google.maps.TravelMode.DRIVING,
+                    unitSystem: google.maps.UnitSystem.METRIC,
+                    avoidHighways: false,
+                    avoidTolls: false,
+                };
+
+                service.getDistanceMatrix(request).then((response) => {
+                    if (response.rows[0].elements[0].status === "OK") {
+                        // Ambil distance dari response
+                        const distanceText = response.rows[0].elements[0].distance.text;
+                        const distanceValue = response.rows[0].elements[0].distance.value;
+                        document.getElementById("jarakText").value = distanceText; // Masukkan ke input form
+                        document.getElementById("jarakValue").value = distanceValue; // Masukkan ke input form
+                    } else {
+                        console.log("Tidak dapat menghitung jarak.");
+                    }
+                }).catch(error => console.error("Error mengambil data jarak:", error));
+            });
+        }
+    </script>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9ZqbeIKEw5uMb2pr1Av-snPL0YEXmi7A&callback=initMap&libraries=places&v=weekly&solution_channel=GMP_CCS_distancematrix_v2"
+        async defer></script>
 </body>
 
 </html>

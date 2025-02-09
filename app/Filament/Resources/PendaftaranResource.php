@@ -104,9 +104,7 @@ class PendaftaranResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('telp')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('jarak')
-                    ->numeric()
-                    ->suffix(' Km'),
+                Tables\Columns\TextColumn::make('keterangan_jarak')->label('Jarak'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Daftar Pada')
                     ->dateTime('d M Y'),
