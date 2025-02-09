@@ -210,7 +210,7 @@
     </script>
 
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9ZqbeIKEw5uMb2pr1Av-snPL0YEXmi7A&callback=initMap&libraries=places&v=weekly&solution_channel=GMP_CCS_distancematrix_v2"
+        src="https://maps.googleapis.com/maps/api/js?key={{ env('API_GOOGLE') }}&callback=initMap&libraries=places&v=weekly&solution_channel=GMP_CCS_distancematrix_v2"
         async defer></script>
 </body>
 
