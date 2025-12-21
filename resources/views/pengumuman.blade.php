@@ -18,7 +18,12 @@
                     <h5 class="text-xl font-semibold text-gray-800">{{ $p->judul }}</h5>
                     <p class="mt-2 text-sm text-gray-500">{{ $p->tanggal }}</p>
                     <p class="mt-4 text-gray-600">
-                        {!! Str::limit($p->body, 100) !!}
+                        @php
+                            $cleanBody = preg_replace('/<figure.*?<\/figure>/s', '', $p->body);
+                            $excerpt = \Illuminate\Support\Str::limit(strip_tags($cleanBody), 150);
+                        @endphp
+                        {{ $excerpt }}
+
                     </p>
                     <a href="/pengumuman-detail/{{ $p->id }}" class="inline-block mt-4 text-blue-500">Baca Selengkapnya &rarr;</a>
                 </div>
