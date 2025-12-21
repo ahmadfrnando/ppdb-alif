@@ -11,6 +11,7 @@ use App\Exports\PendaftaranExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailNotify;
+use App\Models\Schedule;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class PendaftaranController extends Controller
@@ -21,11 +22,36 @@ class PendaftaranController extends Controller
 
     public function index()
     {
-        return view('daftar', [
-            'title' => 'Home',
-            'favicon' => asset('images/logo-triwuri.png')
-        ]);
+        // Cek periode pendaftaran yang aktif
+        $activePeriod = Schedule::isActive()->first();
+        // dd(Schedule::query()->where('is_active', true)->whereDate('start_date', '<=', now())->whereDate('end_date', '>=', now()));
+        
+        if ($activePeriod) {
+            return view('registration.form', [
+                'title' => 'Pendaftaran Peserta Didik Baru',
+                'favicon' => asset('images/logo-triwuri.png'),
+                'period' => $activePeriod
+            ]);
+        } else {
+            $lastPeriod = Schedule::latest('end_date')->first();
+            return view('registration.closed', [
+                'title' => 'Pendaftaran Ditutup',
+                'favicon' => asset('images/logo-triwuri.png'),
+                'tanggalMulai' => $lastPeriod->start_date ?? now(),
+                'tanggalSelesai' => $lastPeriod->end_date ?? now(),
+            ]);
+        }
     }
+
+    // public function index()
+    // {   
+    //     $schedule = Schedule::latest()->first();
+    //     return view('daftar', [
+    //         'title' => 'Home',
+    //         'favicon' => asset('images/logo-triwuri.png'),
+    //         'schedule' => $schedule
+    //     ]);
+    // }
 
     // public function index()
     // {
