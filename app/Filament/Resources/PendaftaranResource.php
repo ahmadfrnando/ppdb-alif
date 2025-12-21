@@ -26,6 +26,19 @@ class PendaftaranResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    protected static ?string $navigationLabel = 'Pendaftaran';
+
+    public static function getModelLabel(): string
+    {
+        return 'Pendaftaran'; // singular
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Data Pendaftaran'; // plural, ini yang mengubah header table
+    }
+
+
     public static function form(Form $form): Form
     {
         return $form

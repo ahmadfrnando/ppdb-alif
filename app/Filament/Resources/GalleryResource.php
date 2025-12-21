@@ -24,6 +24,18 @@ class GalleryResource extends Resource
 
     protected static ?int $navigationSort = 6;
 
+    protected static ?string $navigationLabel = 'Galeri';
+
+    public static function getModelLabel(): string
+    {
+        return 'Galeri'; // singular
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Galeri'; // plural, ini yang mengubah header table
+    }
+
     public static function form(Form $form): Form
     {
         return $form

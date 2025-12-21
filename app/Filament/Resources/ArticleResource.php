@@ -25,6 +25,18 @@ class ArticleResource extends Resource
 
     protected static ?int $navigationSort = 5;
 
+    protected static ?string $navigationLabel = 'Artikel';
+
+    public static function getModelLabel(): string
+    {
+        return 'Artikel'; // singular
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Data Artikel'; // plural, ini yang mengubah header table
+    }
+
     public static function form(Form $form): Form
     {
         return $form

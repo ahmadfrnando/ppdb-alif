@@ -29,6 +29,18 @@ class PengumumanResource extends Resource
 
     protected static ?int $navigationSort = 4;
 
+    protected static ?string $navigationLabel = 'Pengumuman';
+
+    public static function getModelLabel(): string
+    {
+        return 'Pengumuman'; // singular
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Data Pengumuman'; // plural, ini yang mengubah header table
+    }
+
     public static function form(Form $form): Form
     {
         return $form

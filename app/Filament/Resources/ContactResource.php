@@ -27,6 +27,18 @@ class ContactResource extends Resource
 
     protected static ?int $navigationSort = 7;
 
+    protected static ?string $navigationLabel = 'Kontak';
+
+    public static function getModelLabel(): string
+    {
+        return 'Kontak'; // singular
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return 'Kontak'; // plural, ini yang mengubah header table
+    }
+
     public static function form(Form $form): Form
     {
         return $form
