@@ -15,12 +15,12 @@ class PengumumanController extends Controller
         return view('pengumuman', compact('pengumuman', 'title', 'favicon'));
     }
 
-    public function detail(Request $request)
+    public function detail(Request $request, int $id)
     {
-        $id = $request->id;
         $pengumuman = Pengumuman::find($id);
+        $siswas = $pengumuman->schedule->siswas()->get();
         $title = 'Pengumuman';
         $favicon = asset('images/logo-triwuri.png');
-        return view('pengumuman-detail', compact('pengumuman', 'title', 'favicon'));
+        return view('pengumuman-detail', compact('pengumuman', 'siswas', 'title', 'favicon'));
     }
 }

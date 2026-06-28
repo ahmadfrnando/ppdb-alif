@@ -23,6 +23,6 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123')
         ]);
 
-        $this->call(ScheduleSeeder::class);
+        $this->call([ScheduleSeeder::class, PendaftaranSeeder::class]);
     }
 }

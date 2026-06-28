@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('judul');
             $table->text('body');
             $table->date('tgl');
-            $table->string('foto');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pengumumen');
+        Schema::dropIfExists('pengumuman');
     }
 };

@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PengumumanResource\Pages;
 use App\Filament\Resources\PengumumanResource\RelationManagers;
 use App\Models\Pengumuman;
+use App\Models\Schedule;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
@@ -20,6 +21,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\Select;
 
 class PengumumanResource extends Resource
 {
@@ -46,9 +48,13 @@ class PengumumanResource extends Resource
         return $form
             ->schema([
                 // judul, body, tgl, foto
+                Select::make('schedule_id')
+                ->options(Schedule::all()->pluck('period', 'id'))
+                ->label('Periode')
+                ->searchable(),
                 TextInput::make('judul')->required(),
                 DatePicker::make('tgl')->label('Dibuat Pada')->required(),
-                FileUpload::make('foto')->required()
+                FileUpload::make('foto')
                 ->label('Upload Gambar max 1 MB')
                 ->directory('pengumuman')
                 ->image()
@@ -56,8 +62,7 @@ class PengumumanResource extends Resource
                 ->imageCropAspectRatio('16:9')
                 ->imageResizeTargetWidth('1920')
                 ->imageResizeTargetHeight('1080')
-                ->maxSize(1024)
-                ->columnSpan(2),
+                ->maxSize(1024),
                 RichEditor::make('body')->label('Isi Pengumuman')->required()->columnSpan(2),
             ]);
     }

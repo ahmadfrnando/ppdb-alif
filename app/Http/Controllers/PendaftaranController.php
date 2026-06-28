@@ -135,6 +135,7 @@ class PendaftaranController extends Controller
             
             // Simpan data pendaftaran ke database dengan status zonasi dan jarak
             $dataPendaftaran = Pendaftaran::create([
+                'schedule_id' => Schedule::isActive()->first()->id,
                 'nama_siswa' => $data['nama_siswa'],
                 'agama' => $data['agama'],
                 'warga_negara' => $data['warga_negara'],

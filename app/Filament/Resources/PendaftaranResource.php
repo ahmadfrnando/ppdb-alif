@@ -106,7 +106,11 @@ class PendaftaranResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('no')
-                ->rowIndex(),
+                    ->rowIndex(),
+                Tables\Columns\TextColumn::make('schedule.period')
+                    ->label('Periode')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('nama_siswa')
                     ->searchable()
                     ->sortable(),

@@ -16,7 +16,7 @@ Route::get('/', function () {
         'title' => 'Home',
         'favicon'=> asset('images/logo-triwuri.png')
     ]);
-});
+})->name('home');
 Route::get('/profil', function () {
     return view('profil', [
         'title' => 'Profil',

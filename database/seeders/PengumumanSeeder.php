@@ -11,7 +11,7 @@ class PengumumanSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void
-    {
+    {   
         \App\Models\Pengumuman::factory()->count(5)->create();
     }
 }

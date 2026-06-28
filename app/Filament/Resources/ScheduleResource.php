@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Notifications\Notification;
+use Illuminate\Validation\ValidationException;
 
 class ScheduleResource extends Resource
 {
@@ -19,7 +21,7 @@ class ScheduleResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-     protected static ?string $navigationLabel = 'Jadwal Pendaftaran';
+    protected static ?string $navigationLabel = 'Jadwal Pendaftaran';
 
     public static function getModelLabel(): string
     {
@@ -35,11 +37,12 @@ class ScheduleResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('period')
+                    ->required()
+                    ->unique(),
                 Forms\Components\DatePicker::make('start_date')
                     ->required(),
                 Forms\Components\DatePicker::make('end_date')
-                    ->required(),
-                Forms\Components\Toggle::make('is_active')
                     ->required(),
             ]);
     }
@@ -48,6 +51,9 @@ class ScheduleResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('period')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('start_date')
                     ->date()
                     ->sortable(),
@@ -56,7 +62,28 @@ class ScheduleResource extends Resource
                     ->sortable(),
                 Tables\Columns\ToggleColumn::make('is_active')
                     ->label('Aktif')
-                    ->sortable(),
+                    ->sortable()
+                    ->beforeStateUpdated(function (Schedule $record, bool $state): void {
+                        if ($state) {
+                            $sudahAdaYangAktif = Schedule::where('is_active', true)
+                                ->where('id', '!=', $record->id)
+                                ->exists();
+
+                            if ($sudahAdaYangAktif) {
+                                // Tampilkan notifikasi error yang jelas
+                                Notification::make()
+                                    ->title('Gagal Mengaktifkan')
+                                    ->body('Hanya boleh ada 1 schedule yang aktif dalam satu waktu.')
+                                    ->danger()
+                                    ->send();
+
+                                // Ini yang paling penting: menghentikan proses update
+                                throw ValidationException::withMessages([
+                                    'is_active' => 'Sudah ada schedule lain yang sedang aktif.',
+                                ]);
+                            }
+                        }
+                    }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

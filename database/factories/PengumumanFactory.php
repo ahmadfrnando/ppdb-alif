@@ -21,6 +21,7 @@ class PengumumanFactory extends Factory
             'body' => $this->faker->paragraphs(3, true),
             'tgl' => $this->faker->date(),
             'foto' => 'pengumuman/sample.png',
+            'schedule_id' => \App\Models\Schedule::factory(),
         ];
     }
 }

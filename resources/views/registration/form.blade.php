@@ -18,6 +18,12 @@
                 <h1 class="text-3xl font-bold text-gray-800 mb-2">Form Pendaftaran Siswa Baru</h1>
                 <p class="text-gray-600">TK. Raudhatul Athfal Kota Binjai</p>
                 <div class="mt-4 h-1 w-24 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+                <a href="{{ route('home') }}" class="inline-block mt-4 text-blue-600 hover:text-blue-800 font-medium transition duration-200">
+                    <svg class="w-5 h-5 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Kembali ke Halaman Utama
+                </a>
             </div>
         </div>
 
