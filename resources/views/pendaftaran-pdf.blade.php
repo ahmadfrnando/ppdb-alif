@@ -154,9 +154,9 @@ button:hover {
 
         <div class="data-section">
             <h2>Data Wali</h2>
-            <p><strong>Nama Wali:</strong> {{ $data->nama_wali}} </p>
-            <p><strong>Pendidikan Wali:</strong> {{ $data->pendidikan_wali}} </p>
-            <p><strong>Pekerjaan Wali:</strong>  {{ $data->pekerjaan_wali}}</p>
+            <p><strong>Nama Wali:</strong> {{ $data->nama_wali ?? '-' }} </p>
+            <p><strong>Pendidikan Wali:</strong> {{ $data->pendidikan_wali ?? '-' }} </p>
+            <p><strong>Pekerjaan Wali:</strong>  {{ $data->pekerjaan_wali ?? '-' }}</p>
             <p><strong>Alamat:</strong> {{ $data->alamat}} </p>
             <p><strong>No. Telp/HP:</strong> {{ $data->telp}} </p>
             <p><strong>Email:</strong> {{ $data->email}} </p>

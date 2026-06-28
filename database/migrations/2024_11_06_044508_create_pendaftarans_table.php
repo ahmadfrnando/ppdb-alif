@@ -25,9 +25,9 @@ return new class extends Migration
             $table->string('nama_ibu');
             $table->string('pendidikan_ibu');
             $table->string('pekerjaan_ibu');
-            $table->string('nama_wali');
-            $table->string('pendidikan_wali');
-            $table->string('pekerjaan_wali');
+            $table->string('nama_wali')->nullable();
+            $table->string('pendidikan_wali')->nullable();
+            $table->string('pekerjaan_wali')->nullable();
             $table->string('alamat');
             $table->string('telp');
             $table->string('email');

@@ -80,13 +80,10 @@ class PendaftaranResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('nama_wali')
-                    ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('pendidikan_wali')
-                    ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('pekerjaan_wali')
-                    ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('alamat')
                     ->required()
